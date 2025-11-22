@@ -1,7 +1,9 @@
 "use client";
 
 import { EventCard } from "@/components/event-card";
-import { Hero } from "@/components/hero";
+import { HeroSection } from "@/components/landing/hero-section";
+import { FeatureGrid } from "@/components/landing/feature-grid";
+import { CTASection } from "@/components/landing/cta-section";
 import { motion } from "framer-motion";
 
 // Mock data for events
@@ -73,13 +75,15 @@ const item = {
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Hero />
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
+      <HeroSection />
 
-      <section className="container mx-auto px-4 py-16">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold tracking-tight">Upcoming Events</h2>
-          <a href="#" className="text-primary hover:underline font-medium">View all</a>
+      <FeatureGrid />
+
+      <section id="events" className="container mx-auto px-4 py-24">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold tracking-tight mb-4">Trending Now</h2>
+          <p className="text-muted-foreground text-lg">See what's happening on campus this week.</p>
         </div>
 
         <motion.div
@@ -87,7 +91,7 @@ export default function Home() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           {FEATURED_EVENTS.map((event) => (
             <motion.div key={event.id} variants={item} className="h-full">
@@ -102,6 +106,8 @@ export default function Home() {
           ))}
         </motion.div>
       </section>
+
+      <CTASection />
     </div>
   );
 }
